@@ -834,7 +834,10 @@
 					}
 					break;
 				case KEY_ESC:
-					self.blur();
+					if (!self.settings.openOnFocus)
+						self.close(); // not openOnFocus so ok to just close and not blur
+					else
+						self.blur();  // openOnFocus so blur to remove focus when escaping from dropdown
 					return;
 				case KEY_DOWN:
 					if (!self.isOpen && self.hasOptions) {
@@ -1008,6 +1011,10 @@
 					}
 				}
 			}
+	
+			// if not openOnFocus, dropdown should be closed until input occurs again
+			if (!self.settings.openOnFocus)
+				self.close();
 		},
 	
 		/**
