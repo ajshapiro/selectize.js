@@ -418,6 +418,7 @@ $.extend(Selectize.prototype, {
 				e.preventDefault();
 				return;
 			case KEY_RETURN:
+      case KEY_TAB:
 				if (self.isOpen && self.$activeOption) {
 					self.onOptionSelect({currentTarget: self.$activeOption});
 				}
@@ -429,12 +430,14 @@ $.extend(Selectize.prototype, {
 			case KEY_RIGHT:
 				self.advanceSelection(1, e);
 				return;
+/*
 			case KEY_TAB:
 				if (self.settings.create && $.trim(self.$control_input.val()).length) {
 					self.createItem();
 					e.preventDefault();
 				}
 				return;
+*/
 			case KEY_BACKSPACE:
 			case KEY_DELETE:
 				self.deleteSelection(e);
