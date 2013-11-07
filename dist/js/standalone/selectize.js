@@ -1445,8 +1445,8 @@
 	      case KEY_TAB:
 					if (self.isOpen && self.$activeOption) {
 						self.onOptionSelect({currentTarget: self.$activeOption});
+	          e.preventDefault();
 					}
-					e.preventDefault();
 					return;
 				case KEY_LEFT:
 					self.advanceSelection(-1, e);
@@ -2623,8 +2623,11 @@
 			self.showInput();
 			self.refreshOptions(true);
 	
-			// select previous option
-			if (option_select) {
+	    // if not openOnFocus, dropdown should be closed until input occurs again
+	    if (!self.settings.openOnFocus)
+	      self.close();
+	    // else select previous option
+	    else if (option_select) {
 				$option_select = self.getOption(option_select);
 				if ($option_select.length) {
 					self.setActiveOption($option_select);
